@@ -1,0 +1,2162 @@
+ <style>
+
+    
+        /* Smooth Scroll Helper for Lenis */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+        html {
+            scroll-behavior: smooth;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            cursor: none !important;
+        }
+        body
+        
+         {
+            background-color: #050505; /* Default dark background */
+            color: #ffffff;
+            min-height: 100vh;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+         /* --- Updated Background Logic to match Screenshot --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 180%, #050505 0%, transparent 60%),
+                radial-gradient(circle at -50% 50%, #050505 0%, transparent 40%),
+                radial-gradient(circle at 150% 50%, #050505  0%, transparent 40%);
+            z-index: -2;
+            opacity: 0.6;
+        }
+       
+        @keyframes neon-pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        
+       /* --- Custom Cursor Styles --- */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #fff; /* ডিফল্ট সাদা */
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, background-color 0.3s ease;
+    /* এই লাইনটি যোগ করা হয়েছে যাতে সাদা ব্যাকগ্রাউন্ডে কার্সার দেখা যায় */
+    mix-blend-mode: difference; 
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff; /* ডিফল্ট সাদা বর্ডার */
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s ease-out, background-color 0.3s ease, border-color 0.3s ease;
+    /* এই লাইনটি যোগ করা হয়েছে */
+    mix-blend-mode: difference;
+}
+
+.cursor-hover {
+    transform: scale(1.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+}
+        /* --- Dark Theme Styles --- */
+        body.dark-theme {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+        body.dark-theme .section-title {
+            color: #ffffff;
+        }
+        body.dark-theme .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
+        }
+        body.dark-theme .pricing-card:nth-child(1) { box-shadow: 0 15px 40px rgba(0, 225, 255, 0.979); }
+        body.dark-theme .pricing-card:nth-child(2) { box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2); }
+        body.dark-theme .pricing-card:nth-child(3) { box-shadow: 0 15px 40px rgba(231, 228, 176, 0.15); }
+        body.dark-theme .pricing-card.popular {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        body.dark-theme .price span,
+        body.dark-theme .pricing-card ul li {
+            color: #bbb;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background 0.3s ease, padding 0.3s ease, border-bottom 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.959);
+            backdrop-filter: blur(12px);
+            padding: 15px 80px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.02);
+        }
+        /* --- Logo White Logic --- */
+        header.scrolled .logo-link img {
+            filter: invert(1);
+        }
+        .logo-link img {
+            width: 130px;
+            height: auto;
+            transition: filter 0.3s ease;
+            filter: invert(1); /* Ensures logo is visible on dark bg initially */
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #ccc;
+            margin-left: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        nav a:hover { color: #fff; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #fff;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        nav a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        .contact-btn {
+            background: #fff;
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+        .contact-btn:hover { background: #ddd; }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .header-spacer { height: 90px; }
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #444;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        h1 {
+            font-size: 4rem;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .sub-text {
+            font-size: 1.1rem;
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .rating {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #bbb;
+            margin-top: 20px;
+        }
+        .rating span { color: #ffd900fa; margin-right: 5px; opacity: 0.8; }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+        .marquee-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .marquee-line {
+            display: flex;
+            width: max-content;
+            gap: 60px;
+            align-items: center;
+        }
+        .line-1 { animation: scrollLeft 45s linear infinite; }
+        .line-2 { animation: scrollRight 45s linear infinite; }
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .marquee-line img {
+            height: 25px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .marquee-line img { filter: invert(1) grayscale(100%); }
+        .marquee-line img:hover {
+            filter: invert(1) grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .section-container {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; letter-spacing: -1px; color: #fff; }
+        /* --- Stats Section (Process Theme Style) --- */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.stat-item {
+    padding: 40px 20px;
+    /* Process section er moto dark transparent background */
+    background: rgba(255, 255, 255, 0.03); 
+    border-radius: 20px;
+    /* Halka border jeta hover korle ujjol hobe */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    text-align: center; /* Content center e thakbe jemon chilo */
+}
+
+.stat-number { 
+    font-size: 3.5rem; 
+    font-weight: 300; /* Modern thin look */
+    color: #ffffff; /* Header er moto full white */
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+}
+
+.stat-label { 
+    font-size: 0.9rem; 
+    /* Passage er moto opacity komano hoyeche */
+    color: #ffffff; 
+    font-weight: 500; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+}
+
+/* Hover Effect - Process section er accent color use kora hoyeche */
+.stat-item:hover {
+    transform: translateY(-10px);
+    background: rgba(107, 161, 123, 0.05); /* Process section er green tone */
+    border-color: #afff1a63; /* Accent green color */
+}
+
+.stat-item:hover .stat-number {
+    color: #afff1ad8; /* Hover e number-o green hobe */
+}
+
+.stat-item:hover .stat-label {
+    color: #ffffff; /* Hover e text ektu ujjol hobe */
+    opacity: 1;
+}
+
+
+       /* --- Updated Filter Styles --- */
+.filter-container {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03); /* Process-er moto subtle dark base */
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    color: rgba(255, 255, 255, 0.7); /* Thik passage-er moto muted opacity */
+    letter-spacing: 0.5px;
+}
+
+/* Active & Hover: Green Accent Theme */
+.filter-btn.active, .filter-btn:hover {
+    background: #97e409; /* Accent green color */
+    color: #050505; /* Black text for better contrast on green */
+    border-color: #afff1a4f;
+    transform: translateY(-5px); /* Floating effect */
+    box-shadow: 0 10px 20px rgba(99, 241, 142, 0.2); /* Glow effect */
+}
+
+/* Button-e click korle ektu shrink hobar animation */
+.filter-btn:active {
+    transform: translateY(-2px) scale(0.95);
+}
+        /* --- Professional Project Card Styling --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #1a1a1a;
+            height: 380px;
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+        }
+        .project-card.hide { display: none; }
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .project-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            backdrop-filter: blur(2px);
+            color: #fff;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+        }
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .project-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+        }
+        
+
+.reviews {
+    background-color: transparent;
+    color: #fff;
+    padding: 60px 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.reviews-content {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title { font-size: 2.5rem; font-weight: bold; margin: 0; }
+.section-subtitle { color: #888; margin-top: 10px; }
+
+/* Fixed Masking */
+.reviews-wrapper {
+    width: 100%;
+    position: relative;
+    /* Two sides smooth fade */
+    mask-image: linear-gradient(to right, transparent, black 55%, black 25%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 55%, black 25%, transparent);
+}
+
+.review-container {
+    display: flex;
+    width: 100%;
+}
+
+.review-track {
+    display: flex;
+    width: max-content; 
+    gap: 20px;
+}
+
+/* Perfect Seamless Animation */
+@keyframes infinite-rtl {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 10px)); } /* -50% mane exact ordhek group par hoye jabe, gap adjust shoho */
+}
+
+.scroll-rtl .review-track {
+    animation: infinite-rtl 20s linear infinite;
+}
+
+/* Mouse nile thambe na, speed-o kombe na */
+.review-container:hover .review-track {
+    animation-play-state: running; 
+}
+
+/* Card Styling */
+.review-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 20px;
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.stars {
+    color: #88ff00;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.review-text {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.name { font-weight: bold; font-size: 0.85rem; margin: 0; }
+.role { font-size: 0.75rem; color: #666; margin: 0; }
+
+
+        
+        /* --- Project Modal Styles --- */
+        .project-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            max-width: 1000px;
+            width: 100%;
+            background: #1a1a1a;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: 0.4s ease;
+            color: #fff;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+        }
+        .project-modal.active { display: flex; }
+        .project-modal.active .modal-content { transform: scale(1); opacity: 1; }
+        .modal-image { height: 500px; overflow: hidden; }
+        .modal-image img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-details { padding: 40px; text-align: left; display: flex; flex-direction: column; justify-content: center; }
+        .modal-details h2 { font-size: 2rem; margin-bottom: 10px; }
+        .modal-details p { color: #bbb; line-height: 1.6; margin-bottom: 20px; }
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 2rem;
+            color: #000;
+            background: #fff;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10;
+        }
+
+        
+        
+
+        /* --- Professional Workflow Full-Width Styling --- */
+
+#process {
+    padding: 100px 0;
+    background-color: #00000000;
+    color: #fafafa;
+    width: 100%;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.process-container {
+    display: flex;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    position: relative;
+    z-index: 2;
+}
+
+
+
+@keyframes pulseGlow {
+    0% { transform: scale(1) translate(0, 0); }
+    33% { transform: scale(1.2) translate(80vw, 20vh); }
+    66% { transform: scale(0.8) translate(40vw, 60vh); }
+    100% { transform: scale(1.3) translate(-10vw, 30vh); }
+}
+
+/* Visuals (Left Side) */
+.process-visual {
+    flex: 1;
+    position: sticky;
+    top: 150px;
+    height: fit-content;
+    text-align: left;
+}
+
+.process-title-box h2 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 0.9;
+    font-weight: 300;
+    letter-spacing: -2px;
+    text-align: left;
+
+    /* --- Scroll Animation Settings --- */
+    animation: revealText linear both;
+    animation-timeline: view();
+    /* Text-ti jokhon screen er niche thakbe tokhon shuru hobe, 40% upore uthle finish hobe */
+    animation-range: entry 10% cover 40%; 
+}
+
+.italic-serif1 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #acff40f8;
+}
+
+/* --- Animation Keyframes --- */
+@keyframes revealText {
+    from {
+        opacity: 0;
+        transform: translateY(100px); /* Niche theke shuru hobe */
+        clip-path: inset(100% 0% 0% 0%); /* Optional: Niche theke "unmask" hoye ber hobe */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Original position e ashbe */
+        clip-path: inset(0% 0% 0% 0%);
+    }
+}
+
+/* Steps (Right Side) */
+.process-steps {
+    flex: 1.2;
+    text-align: left; /* Ensure overall container is left aligned */
+}
+
+.process-item {
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+    text-align: left; /* Headers and text left align */
+}
+
+/* --- Header & Passage Contrast Fix --- */
+.process-item h3 {
+    font-size: 1.8rem;
+    color: #ffffff; /* Full white for header */
+    margin-bottom: 15px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.process-item h3 span {
+    font-size: 1rem;
+    color: #afff1ac2; /* Step number highlighted */
+}
+
+.process-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6); /* Reduced opacity for passage */
+    max-width: 500px;
+    margin-left: 0; /* Forced left align */
+}
+
+/* Background Glow */
+.glowing-shape {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #68f1630a 0%, transparent 70%);
+    filter: blur(80px);
+    top: -10%;
+    left: -10%;
+    z-index: 1;
+    pointer-events: none;
+    animation: pulseGlow  infinite alternate;
+}
+/* Hover Effect */
+.process-item:hover {
+    padding-left: 20px;
+    background: linear-gradient(90deg, #63f18e0a 0%, transparent 100%);
+    border-bottom-color: #AFFF1A;
+}
+
+.process-item:hover p {
+    color: rgba(255, 255, 255, 0.9); /* Hover korle passage ektu ujjol hobe */
+}
+
+/* Staggered Animations */
+.process-item:nth-child(1) { animation-delay: 0.2s; }
+.process-item:nth-child(2) { animation-delay: 0.4s; }
+.process-item:nth-child(3) { animation-delay: 0.6s; }
+.process-item:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .process-container { flex-direction: column; padding: 0 8%; }
+    .process-visual { position: relative; top: 0; margin-bottom: 50px; }
+    #process { width: 100%; left: 0; transform: none; margin: 0; }
+    .process-item p { max-width: 100%; }
+}
+
+
+
+
+
+     /* --- Ultra Minimalist Floating Buttons (Dark Glass Theme) --- */
+.whatsapp-float, .back-to-top {
+    position: fixed;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    text-decoration: none;
+    
+    /* Dark Glass Effect: এটি সাদা ব্যাকগ্রাউন্ডেও খুব সুন্দর ফুটে উঠবে */
+    background: rgba(0, 0, 0, 0.8); /* গাঢ় কালো ব্যাকগ্রাউন্ড */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); /* হালকা শ্যাডো */
+}
+
+.whatsapp-float {
+    bottom: 30px;
+}
+
+.back-to-top {
+    bottom: 95px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Hover State */
+.whatsapp-float:hover, .back-to-top:hover {
+    background: rgba(0, 0, 0, 0.9); /* হোভারে আরও ডার্ক হবে */
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Icons Color */
+.whatsapp-float svg { 
+    width: 24px; 
+    height: 24px; 
+    fill: #25d366; 
+}
+
+.back-to-top svg { 
+    width: 20px; 
+    height: 20px; 
+    fill: #fff; 
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float, .back-to-top {
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* Pricing Section */
+.pricing-section {
+    background-color: transparent;
+    padding: 80px 20px;
+    font-family: 'Poppins', sans-serif; /* Shob text ekhon Poppins hobe */
+}
+
+/* 3-Column Grid */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+    will-change: transform;
+}
+
+/* Premium Glass Card */
+.pricing-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 45px 30px;
+    border-radius: 40px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-weight: 400; /* Regular Poppins */
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pricing-card:hover {
+    transform: translateY(-15px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #bfff00;
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Floating Popular Badge Fix */
+.popular-badge {
+    position: absolute;
+    top: -12px; /* Card er baire upore uthiye deya hoyeche */
+    left: 75%;
+    transform: translateX(-50%); /* Perfectly center-e thakbe */
+    background: #bfff00f3; 
+    color: #000;
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700; /* Badge er text ektu bold rakha bhalo */
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(191, 255, 0, 0.2);
+}
+
+/* Content Details */
+.plan-name { font-size: 1.1rem; color: #888; margin-bottom: 10px; font-weight: 400; }
+.price { font-size: 2.5rem; font-weight: 700; margin-bottom: 25px; letter-spacing: -1px; }
+.price span { font-size: 1rem; color: rgba(255, 255, 255, 0.3); font-weight: 400; }
+
+/* Feature List */
+.feature-list { list-style: none; padding: 0; margin-bottom: 30px; flex-grow: 1; }
+.feature-list li { 
+    font-size: 0.9rem; color: #ccc; margin-bottom: 12px; 
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 400;
+}
+.check { color: #bfff00; }
+
+/* Interactive Button */
+.pricing-btn {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pricing-btn:hover {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.pricing-card.popular .pricing-btn { background: #bfff00; }
+.pricing-card.popular .pricing-btn:hover {
+    background: transparent;
+    color: #bfff00;
+    border-color: #bfff00;
+}
+
+/* Blur Effect on others */
+.pricing-grid:hover .pricing-card:not(:hover) {
+    opacity: 0.5;
+    filter: blur(2px);
+}
+
+/* Mobile View */
+@media (max-width: 900px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+}
+        
+
+        .about-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            text-align: left;
+        }
+        .about-image {
+            flex: 1.2;
+            height: 350px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .fade-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-img.active {
+            opacity: 1;
+            position: relative;
+        }
+        .about-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            color: #fff;
+        }
+        .about-section h2 { font-size: 2.5rem; margin-bottom: 20px; letter-spacing: -1px; }
+        .about-section p { font-size: 1.15rem; color: #bbb; line-height: 1.7; }
+        .about-highlight { color: #fff; font-weight: 600; border-bottom: 2px solid #00ff00; } /* Neon highlight */
+        
+        /* --- PROFESSIONAL CONTACT STYLES UPDATED --- */
+.contact-section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif; /* Poppins add kora hoyeche */
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.02); /* Minimal Dark Background */
+    backdrop-filter: blur(15px);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Default Border */
+    padding: 50px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    text-align: left;
+    color: #ffffff;
+    transition: border-color 0.4s ease;
+}
+
+/* Mouse wrapper-e nile border color hobe */
+.contact-wrapper:hover {
+    border-color: rgba(191, 255, 0, 0.4);
+}
+
+.contact-info-side h2 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+
+.contact-info-side p { color: #bbb; margin-bottom: 30px; font-size: 1rem; }
+
+/* Contact Method Animation */
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #fff;
+    transition: 0.3s;
+}
+
+/* Form Group Styles */
+.form-group { margin-bottom: 25px; }
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    font-weight: 500; /* Medium for Poppins */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888; /* Muted label */
+}
+
+/* Input & Textarea Styling with Border Animation */
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 18px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Default Border */
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 1rem;
+    outline: none;
+    color: #fff;
+    /* Sudhu border color transition hobe */
+    transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+}
+
+/* Hover: Mouse nile sudhu Border color change hobe */
+.form-group input:hover, .form-group textarea:hover {
+    border-color: #bfff00; /* Lime border on hover */
+    background: rgba(191, 255, 0, 0.02);
+}
+
+/* Focus: Click korle jeno border fute uthe */
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #bfff00;
+    background: rgba(191, 255, 0, 0.05);
+    box-shadow: 0 0 15px rgba(191, 255, 0, 0.1);
+}
+
+/* Submit Button - Jemon chilo temon rakha hoyeche */
+.submit-btn {
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: #ddd;
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(255,255,255,0.1);
+}
+
+/* Spinner & Status (Aager code) */
+.spinner {
+    width: 20px; height: 20px;
+    border: 3px solid rgba(0,0,0,0.1);
+    border-top: 3px solid #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+    .contact-wrapper { grid-template-columns: 1fr; padding: 30px; }
+    .contact-info-side h2 { font-size: 2rem; }
+}
+        /* Container: Balanced and focused */
+.faq-container { 
+    max-width: 720px; 
+    margin: 60px auto; 
+    padding: 0 20px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Item: Solid background with subtle borders */
+.faq-item {
+    background: #111111; /* Deep solid dark */
+    border-radius: 12px;
+    border: 1px solid #222222;
+    margin-bottom: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: #fffffffa;
+}
+
+/* Hover: Subtle lift and border highlight */
+.faq-item:hover {
+    border-color: #444444;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Question: Bold and clear */
+.faq-question { 
+    padding: 22px 28px; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+/* Answer: High contrast but easy on the eyes */
+.faq-answer { 
+    padding: 0 28px; 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #a1a1a1; /* Ash white for better readability */
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Active State: Clean focus */
+.faq-item.active {
+    border-color: #62ff07ef; /* White border on active to stand out */
+    background: #161616;
+}
+
+.faq-item.active .faq-answer { 
+    padding-bottom: 22px; 
+    max-height: 300px;
+    opacity: 1;
+}
+
+/* Icon: Minimalist Plus to Cross */
+.faq-icon {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+/* Footer: Professional Grid */
+footer { 
+    background: #000000; 
+    padding: 80px 40px; 
+    border-top: 1px solid #111111;
+    margin-top: 80px;
+}
+
+.footer-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 40px; 
+    max-width: 1100px;
+    margin: 0 auto;
+}
+        /* Footer logo inverted */
+        .footer-logo img { width: 150px; filter: invert(1); margin-bottom: 20px; }
+        
+        .footer-text { color: #888; font-size: 0.95rem; line-height: 1.6; }
+        .footer-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+        .footer-links a:hover { color: #fff; padding-left: 5px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 25px; }
+        .social-icons a {
+            width: 42px; height: 42px; background: #1a1a1a; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s; text-decoration: none; color: #fff; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .social-icons a:hover { background: #fff; color: #000; transform: translateY(-5px); }
+        .social-icons svg { width: 18px; height: 18px; fill: currentColor; }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 30px; text-align: center; color: #555; font-size: 0.85rem; }
+        @media (max-width: 850px) {
+            .contact-wrapper { grid-template-columns: 1fr; padding: 30px; }
+            .contact-info-side h2 { font-size: 2rem; }
+            .process-container { flex-direction: column; text-align: center; }
+            .process-item:hover { transform: translateY(-10px); }
+        }
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            header.scrolled { padding: 10px 20px; }
+            .menu-toggle { display: flex; }
+            
+            nav.active ~ .logo-link img {
+                filter: invert(1);
+            }
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(12px);
+                padding: 20px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                transition: 0.3s;
+            }
+            nav.active { display: flex; }
+            nav a { margin: 15px 0; font-size: 1.1rem; text-align: center; width: 100%; margin-left: 0; }
+            nav a::after { display: none; }
+            .contact-btn { display: none; }
+            .header-spacer { height: 70px; }
+            h1 { font-size: 2.5rem; }
+            .about-section { flex-direction: column; text-align: center; }
+            .about-image { width: 100%; height: 220px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            footer { padding: 60px 20px 30px; }
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -8px); }
+            
+            .cursor-dot, .cursor-outline { display: none; }
+            * { cursor: auto !important; }
+        }
+        /* এই কোডটি আপনার existing CSS-এর শেষে যোগ করুন */
+#services .section-title,
+#projects .section-title,
+#reviews .section-title,
+#pricing .section-title,
+#process .section-title,
+#contact .section-title,
+#about .section-title,
+#team .section-title,
+#faq .section-title,
+#stats .section-title,
+#why-choose-us, .section-title{
+    background: none !important;
+    -webkit-text-fill-color: #fff !important;
+    color: #fff !important;
+}
+
+.responsive-footer-logo {
+    width: 100%;
+    background-color: #000; /* Apnar footer er sathe match korar jonno */
+    overflow: hidden;
+    line-height: 0;
+}
+
+.footer-image-link {
+    display: block;
+    width: 100%;
+}
+
+.responsive-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.2; /* Halka texture look er jonno */
+    filter: blur(1px); /* Motion blur feel */
+    transition: opacity 0.3s ease;
+}
+
+/* Hover korle ektu ujjol hobe */
+.footer-image-link:hover .responsive-img {
+    opacity: 0.4;
+    filter: blur(0px);
+}
+
+/* Mobile er jonno adjustment */
+@media (max-width: 768px) {
+    .responsive-img {
+        width: 150%; /* Mobile e ektu boro kore dekhabe jeno kete na jay */
+        margin-left: -25%; /* Center e rakhar jonno */
+        opacity: 0.3; /* Mobile e ektu beshi ujjol kora holo */
+    }
+}
+.responsive-footer-logo {
+    width: 100%;
+    background-color: #000;
+    overflow: hidden;
+    padding: 40px 0; /* Opore niche ektu jayga rakha holo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.responsive-footer-logo a {
+    width: 90%; /* Screen er digh-e ektu gap rakhbe jeno crop na hoy */
+    max-width: 1400px;
+    display: flex;
+    justify-content: center;
+}
+
+.responsive-footer-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Image ke crop hote dibe na, puruta dhore rakhbe */
+    display: block;
+    opacity: 0.2;
+    filter: blur(1px);
+    transition: all 0.4s ease;
+}
+
+/* Mobile er jonno khusus adjustment */
+@media (max-width: 768px) {
+    .responsive-footer-logo {
+        padding: 20px 0;
+    }
+    
+    .responsive-footer-logo a {
+        width: 95%; /* Mobile e screen er pray purota nibe kintu border touch korbe na */
+    }
+
+    .responsive-footer-logo img {
+        opacity: 0.3; /* Mobile e ektu ujjol */
+        filter: blur(0px); /* Mobile e image chotto thake tai blur soriye dewa bhalo */
+    }
+}
+.marquee-section {
+    padding: 70px 0;
+    background-color: #FAFAFA; /* Screenshot er moto halka purple */
+    overflow: hidden;
+}
+
+.marquee-container {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    margin: 15px 0;
+    /* Blur Masking */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+
+/* Text Styling */
+.text-row span {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    padding: 0 20px;
+}
+
+/* Image Styling (Phone & Tablet style) */
+.image-row img {
+    height: 300px; /* Tablet/Phone size */
+    border-radius: 20px;
+    margin: 0 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Animation for Right to Left */
+.reverse {
+    animation: scroll-left 30s linear infinite;
+}
+
+/* Animation for Left to Right */
+.forward {
+    animation: scroll-right 30s linear infinite;
+}
+
+@keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+.marquee-content {
+    display: flex; /* Element guloke ek line-e anar jonno */
+    align-items: center;
+    gap: 60px; /* Ekhane 60px holo proti word-er moddher gap. Apni kom-beshi korte paren */
+    white-space: nowrap;
+}
+
+/* Prerthi ti word-er agey bullet point dewar jonno (Optional) */
+.marquee-content span::before {
+    content: "•";
+    margin-right: 60px; /* Bullet theke word-er gap */
+}
+/* Container-ke overflow hidden rakhte hobe */
+.marquee-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Flexbox diye gap ebong alignment fix */
+.marquee-content {
+    display: flex;
+    white-space: nowrap;
+    width: max-content; /* Content onujayi width nibe */
+    gap: 80px; /* Word gulor moddhe soman gap */
+    padding-right: 80px; /* Loop point-e gap thik rakhar jonno */
+}
+
+/* Image-er jonno gap alada korte paren */
+.image-row .marquee-content {
+    gap: 40px;
+    padding-right: 40px;
+}
+
+/* Animation shuru hobei screen-er baire theke */
+.forward {
+    animation: scroll-forward 30s linear infinite;
+}
+
+.reverse {
+    animation: scroll-reverse 30s linear infinite;
+}
+
+@keyframes scroll-forward {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Half porjonto jabe */
+}
+
+@keyframes scroll-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+/* শুধুমাত্র ইমেজ রো এর জন্য বিশেষ সমাধান */
+.image-row {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+.image-row .marquee-content {
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+    /* বাম থেকে ডানে যাওয়ার জন্য নতুন অ্যানিমেশন */
+    animation: fillAndScrollRight 30s linear infinite;
+    will-change: transform;
+}
+
+@keyframes fillAndScrollRight {
+    0% {
+        /* শুরুতেই কন্টেন্টকে স্ক্রিনের বামে টেনে রাখা যাতে ডানে ফাঁকা না থাকে */
+        transform: translateX(-50%);
+    }
+    100% {
+        /* ডানে সরিয়ে আনা */
+        transform: translateX(0%);
+    }
+}
+
+/* ইমেজ সাইজ এবং স্টাইল */
+.image-row img {
+    height: 300px; /* আপনার স্ক্রিনশট অনুযায়ী হাইট */
+    width: auto;
+    border-radius: 20px; /* কার্ভ ডিজাইনের জন্য */
+    flex-shrink: 0;
+}
+/* Black Theme Explore Button with 10px upward shift */
+.button-container {
+    text-align: center;
+    margin-top: 50px; /* আপনার পছন্দমতো গ্যাপ দিন */
+    padding: 20px;
+}
+
+.explore-btn {
+    position: relative;
+    display: inline-block;
+    padding: 14px 36px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fffffff8; /* সাদা লেখা */
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid #ffffff3f; /* সাদা বর্ডার */
+    border-radius: 50px;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* বাটনটিকে ১০ পিক্সেল উপরে সরানোর জন্য */
+    transform: translateY(-100px); 
+}
+
+/* স্লাইড-আপ সাদা লেয়ার */
+.explore-btn::before {
+    content: '';
+    position: absolute;
+    top: 100%; /* শুরুতে নিচে থাকবে */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #afff1ae0; /* হোভার করলে এই কালার উপরে উঠবে */
+    z-index: -1;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* মাউস হোভার ইফেক্ট */
+.explore-btn:hover {
+    color: #000000; /* হোভার করলে লেখা কালো হবে */
+}
+
+.explore-btn:hover::before {
+    transform: translateY(-100%); /* নিচ থেকে উপরে স্লাইড হবে */
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* ইমেজ যেন সাইড দিয়ে স্ক্রলবার না আনে */
+}
+
+.side-mockup {
+    position: absolute;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+/* বাম পাশের ইমেজের পজিশন */
+.left-mockup {
+    left: -50px; /* স্ক্রিনের একটু বাইরে থেকে শুরু হবে */
+    top: 50%;
+    transform: translateY(-50%) rotate(5deg); /* সামান্য বাঁকা */
+    animation: floatLeft 6s ease-in-out infinite;
+}
+
+.left-mockup img {
+    width: 350px; /* প্রয়োজনমত ছোট-বড় করুন */
+    opacity: 0.8;
+}
+
+/* ডান পাশের ইমেজের পজিশন */
+.right-mockup {
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-5deg); /* উল্টো দিকে বাঁকা */
+    animation: floatRight 6s ease-in-out infinite;
+}
+
+.right-mockup img {
+    width: 350px;
+    opacity: 0.8;
+}
+
+/* অ্যানিমেশন কি-ফ্রেম */
+@keyframes floatLeft {
+    0%, 100% { transform: translateY(-50%) rotate(5deg); }
+    50% { transform: translateY(-60%) rotate(8deg); } /* উপরে উঠবে */
+}
+
+@keyframes floatRight {
+    0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+    50% { transform: translateY(-40%) rotate(-8deg); } /* নিচে নামবে */
+}
+
+/* রেসপন্সিভ: ছোট স্ক্রিনে ইমেজগুলো হাইড করা ভালো */
+@media (max-width: 1100px) {
+    .side-mockup {
+        display: none;
+    }
+}
+
+/* Black Theme Explore Button - 5% Size Reduced */
+.button-container1 {
+    text-align: center;
+    margin-top: 50px; 
+    padding: 20px;
+}
+
+.explore-btn1 {
+    position: relative;
+    display: inline-block;
+    /* Size 5% komanor jonno padding 14px theke 11px kora holo */
+    padding: 11px 30px; 
+    /* Font size ektu choto kora holo */
+    font-size: 14.5px; 
+    font-weight: 500;
+    color: #ffffffc4; 
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid #ffffff79; 
+    border-radius: 50px;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Button-ke upore uthanor jonno */
+    transform: translateY(-100px); 
+}
+
+/* Slide-up Green Layer */
+.explore-btn1::before {
+    content: '';
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #16ff01; 
+    z-index: -1;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mouse Hover Effect */
+.explore-btn1:hover {
+    color: #000000; 
+}
+
+.explore-btn1:hover::before {
+    transform: translateY(-100%); 
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* Dropdown Wrapper */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content - Premium Dark Look */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Just below the nav link */
+    left: 0;
+    min-width: 240px;
+    background: rgba(20, 20, 20, 0.95); /* Deep dark background */
+    backdrop-filter: blur(10px); /* Modern Glassmorphism effect */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deep shadow for depth */
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease; /* Smooth entrance transition */
+}
+
+/* Dropdown links */
+.dropdown-content a {
+    color: #e0e0e0; /* Light text for dark mode */
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect on dropdown links */
+.dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.05); /* Very subtle highlight */
+    color: #ffffff; /* Brighter white on hover */
+    padding-left: 25px; /* Slight slide effect */
+}
+
+/* Displaying dropdown with animation on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Styling for the parent link when hovering over the menu */
+.dropdown:hover .dropbtn {
+    color: #fff;
+    opacity: 0.7;
+}
+
+/* Why Choose Us Section Styling */
+.why-choose-us {
+    background-color: #000;
+    color: #ffffff;
+    padding: 80px 20px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 25;
+    margin-bottom: -100px;
+    letter-spacing: 0px;
+}
+
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: #0e0e0e0e;
+    padding: 40px 30px;
+    border-radius: 20px;
+    border: 1px solid #1a1a1a;
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.feature-card:hover {
+    background: #111;
+    border-color: #2eff12ea;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.icon-box {
+    font-size: 30px;
+    color: #fff; /* Icon color white raklam apnar design onujayi */
+    margin-bottom: 25px;
+    height: 70px;
+    width: 70px;
+    background: #1a1a1a;
+    line-height: 70px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .section-title { font-size: 28px; }
+    .features-grid { gap: 15px; }
+}
+
+.why-choose-us {
+    background-color: #050703;
+    color: #ffffff;
+    padding: 80px 20px;
+    font-family: 'Inter', sans-serif;
+    
+    /* Center korar jonno niche gulo khub guruttopurno */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center */
+    justify-content: center;
+    width: 100%;
+    /* ফোনে যাতে কন্টেন্ট ওভারল্যাপ না করে সেজন্য height এর বদলে min-height */
+    min-height: 700px; 
+    height: auto;
+}
+
+.meet-motion-comparison {
+    background-color: #000;
+    color: #fff;
+    padding: 80px 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px 20px 30px;
+    color: #929292;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.metrics-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    
+}
+
+.comparison-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;/* ফোনে যাতে কন্টেন্ট ওভারল্যাপ না করে সেজন্য height এর বদলে min-height */
+    min-height: 700px; 
+    height: auto;
+}
+
+.comp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px;
+    border-bottom: 1px solid #111;
+    min-height: 90px;
+}
+
+/* Meet Motion Row Glow */
+.highlighted {
+    background: linear-gradient(90deg, rgba(82, 45, 175, 0.08) 0%, rgba(0,0,0,0) 100%);
+    border: 1px solid rgba(82, 45, 175, 0.2);
+    border-radius: 12px;
+}
+
+.agency-info {
+    width: 45%;
+}
+
+.details h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #c4c4c4;
+}
+
+/* Highlight Text Color for Meet Motion */
+.highlighted h3 {
+    color: #73ff00de; /* Subtle Neon accent from the logo vibe */
+}
+
+.details p {
+    margin: 6px 0 0 0;
+    font-size: 0.85rem;
+    color: #868686;
+    line-height: 1.5;
+}
+
+.check-group {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    font-size: 1.2rem;
+}
+
+.check { color: #7eff28f5; }
+.cross { color: #c2c2c2; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .table-header { display: none; }
+    .comp-row { flex-direction: column; text-align: center; padding: 30px 20px; }
+    .agency-info, .check-group { width: 100%; }
+    .check-group { margin-top: 25px; justify-content: center; gap: 30px; }
+}
+
+/* Sudhu background image-er jonno wrapper */
+.main-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Puru screen height */
+    background-image: url('assets/Image/bg.jpg'); /* Apnar image link din */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+
+    /* Nicher part-ke blur/fade korar jonno mask */
+    mask-image: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.479) 95%,        /* 70% porjonto image clear thakbe */
+        transparent 100%  /* 100% e giye puru transparent hoye nicher bg e mishe jabe */
+    );
+    -webkit-mask-image: linear-gradient(to bottom, 
+        rgb(0, 0, 0) 70%, 
+        transparent 100%
+    );
+}
+
+/* Optional: Jodi blur effect-ke aro ujjol korte chan */
+.main-hero-bg::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%; /* Sudhu nicher 30% jayga */
+    background: linear-gradient(to bottom, transparent, #050505); /* Apnar body background color */
+    pointer-events: none;
+}
+
+
+.contact-btn-pro {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 24px 10px 20px;          /* Reduced padding → smaller button */
+        background: hsl(81, 100%, 55%);
+        color: #000000;
+        font-size: 0.88rem;                     /* Slightly smaller text */
+        font-weight: 600;
+        letter-spacing: -0.2px;
+        text-decoration: none;
+        border-radius: 999px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        white-space: nowrap;
+        z-index: 1;
+    }
+
+    .contact-btn-pro::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: -1;
+    }
+
+    .contact-btn-pro:hover::before {
+        opacity: 1;
+    }
+
+    .contact-btn-pro:hover {
+        color: rgb(0, 0, 0);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 212, 255, 0.25);
+    }
+
+    .contact-btn-pro:hover .btn-arrow {
+        transform: translateX(5px);
+    }
+
+    .btn-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .btn-arrow {
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        flex-shrink: 0;
+    }
+
+    /* Light mode */
+    body.light-theme .contact-btn-pro {
+        background: #050505;
+        color: #ffffff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    body.light-theme .contact-btn-pro:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+    }
+
+    /* Click feedback */
+    .contact-btn-pro:active {
+        transform: translateY(-1px) scale(0.97);
+    }
+
+    /* Mobile adjustment (even smaller on small screens) */
+    @media (max-width: 768px) {
+        .contact-btn-pro {
+            padding: 9px 20px 9px 16px;
+            font-size: 0.85rem;
+            gap: 8px;
+        }
+        .btn-arrow {
+            width: 15px;
+            height: 15px;
+        }
+    }
+    .call-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth motion transition */
+}
+
+.call-btn:hover {
+    transform: translateY(-3px) scale(1.05); /* Halka upore uthbe ebong boro hobe */
+    box-shadow: 0 10px 20px rgba(85, 255, 79, 0.144); /* Glow effect */
+    filter: brightness(1.2); /* Ektu beshi ujjol dekhabe */
+}
+
+.call-btn:active {
+    transform: translateY(-1px) scale(0.98); /* Click korle ektu niche nambe */
+}
+
+.footer-bottom-logo {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 50px;
+    background: #000; /* Footer background jodi kalo hoy */
+}
+
+.motion-text {
+    font-size: 15vw; /* Screen size er upor base kore boro hobe */
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.15); /* Halka shada color */
+    text-transform: lowercase;
+    margin: 0;
+    line-height: 0.8;
+    letter-spacing: -5px;
+    
+    /* Image er moto blur effect */
+    filter: blur(2px);
+    position: relative;
+    user-select: none;
+}
+
+/* Scroll trigger animation (optional) */
+.motion-text::after {
+    content: "meetmotion";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(138, 79, 255, 0.2); /* Apnar purple brand color er halka touch */
+    filter: blur(15px); /* Beshi blur jeno motion feel hoy */
+    z-index: -1;
+}
+.footer-full-branding-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #000;
+    
+    /* Forcefully bottom gap overlap kora */
+    margin-bottom: -10px !important; 
+    padding-bottom: 0 !important;
+    line-height: 0;
+    font-size: 0;
+    display: block;
+}
+
+.footer-full-branding-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: bottom;
+    /* Image ke ektu nicher dike push kora jeno gap overlap hoy */
+    margin-bottom: -50px; 
+    opacity: 0.9;
+}
+
+/* Screen er ekdom nicher default gap soraite body reset */
+body {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+/* Google Fonts ইমপোর্ট (আপনার CSS ফাইলের একদম উপরে দিন) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Playfair+Display:ital@1&display=swap');
+
+.hero-title {
+    font-family: 'Inter', sans-serif; /* মেইন বোল্ড টেক্সটের জন্য */
+    font-size: 65px;
+    font-weight: 700;
+    color: #f3f3f3;
+    letter-spacing: -1.5px;
+    text-align: center;
+}
+
+.italic-serif {
+    font-family: 'Playfair Display', serif; /* ইটালিক সেরিফ ফন্টের জন্য */
+    font-style: italic;
+    font-weight: 400;
+}
+.sub-text {
+    /* আগের সাইজ সাধারণত ১৬-১৮ পিক্সেল থাকে, তাই ২১ পিক্সেল সেট করা হয়েছে */
+    font-size: 21px; 
+    line-height: 1.5;
+    color: #d4d4d4;
+    margin-bottom: 15px;
+}
+
+.rating {
+    /* আগের সাইজ সাধারণত ১৪-১৫ পিক্সেল থাকে, তাই ১৮ পিক্সেল সেট করা হয়েছে */
+    font-size: 17px; 
+    font-weight: 600;
+    color: #cecece;
+}
+
+.rating small {
+    /* মূল টেক্সটের সাথে মিল রেখে এর সাইজও ৩ পিক্সেল বাড়ানো হয়েছে */
+    font-size: 14px; 
+}
+.sub-text {
+    /* আগের স্ট্যান্ডার্ড সাইজ ১৮ পিক্সেল হলে, এখন ২০ পিক্সেল হবে */
+    font-size: 20px; 
+    line-height: 1.5;
+    color: #dadada;
+    margin-bottom: 15px;
+}
+
+.rating {
+    /* আগের সাইজ ১৫ পিক্সেল হলে, এখন ১৭ পিক্সেল হবে */
+    font-size: 17px; 
+    font-weight: 600;
+    color: #cacaca;
+}
+
+.rating small {
+    /* ছোট টেক্সটটিও ২ পিক্সেল বাড়ানো হয়েছে */
+    font-size: 14px; 
+}
+
+
+
+
+
+    </style>
