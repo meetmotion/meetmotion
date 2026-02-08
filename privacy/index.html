@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy</title>
     <link rel="icon" type="image/x-icon" href="assets/1.png">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -22,14 +23,15 @@
             background-color: var(--bg);
             color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Added to prevent horizontal scroll from edge-to-edge image */
         }
 
+        /* Ambient Glow Background */
         body::before {
             content: "";
             position: fixed;
             top: -10%;
-            left: -10%;
+            right: -10%;
             width: 400px;
             height: 400px;
             background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 70%);
@@ -42,6 +44,7 @@
             padding: 100px 24px;
         }
 
+        /* Premium Header */
         header {
             text-align: center;
             margin-bottom: 120px;
@@ -73,6 +76,7 @@
             font-size: 0.9rem;
         }
 
+        /* Content Sections */
         section {
             margin-bottom: 80px;
             opacity: 0;
@@ -107,6 +111,7 @@
             margin-bottom: 24px;
         }
 
+        /* Glass Box Effect */
         .premium-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
@@ -116,6 +121,9 @@
             margin: 40px 0;
         }
 
+        .premium-card strong { color: var(--accent); }
+
+        /* CTA Button */
         .footer-cta {
             text-align: center;
             margin-top: 100px;
@@ -212,12 +220,12 @@
         width: 100%;
     }
 </style>
-            <div class="brand-badge">Meet Motion Security</div>
+            <div class="brand-badge">Meet Motion Privacy</div>
             <h1>Privacy<br>Policy</h1>
             <p class="last-updated">Last Updated — Feb 08, 2026</p>
         </header>
 
-        <section id="p1">
+         <section id="p1">
             <span class="section-num">01/</span>
             <h2>Data Collection</h2>
             <p>At <strong>Meet Motion</strong>, we prioritize the confidentiality of our clients. We only collect essential information such as your name, email address, and project requirements when you reach out to us via our contact forms or WhatsApp.</p>
@@ -240,11 +248,11 @@
 
         <div class="footer-cta">
             <p style="margin-bottom: 30px; color: var(--text-dim);">Questions regarding your data?</p>
-            <a href="https://meetmotion.cc/#contact" class="btn-premium">Connect with Us</a>
+            <a href="https://meetmotion.cc/#contact" class="btn-premium">Contact Our Team</a>
         </div>
     </div>
 
-   <footer id="main-footer" style="background-color: #000000; padding: 40px 20px 0 20px; font-family: Arial, sans-serif;">
+<footer id="main-footer" style="background-color: #000000; padding: 40px 20px 0 20px; font-family: Arial, sans-serif;">
     <style>
         /* Hover Effects */
         .social-icons a {
@@ -358,7 +366,6 @@
 
 </footer>
 
-
     <script>
         const sections = document.querySelectorAll('section');
         const observerOptions = { threshold: 0.1 };
@@ -377,6 +384,4 @@
 </body>
 
 </html>
-
-
 
