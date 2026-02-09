@@ -218,7 +218,21 @@
 
     .minimal-back-btn:hover .text-link::after {
         width: 100%;
-    }
+    }.link-wrapper {
+  text-decoration: none; /* Underline remove korbe */
+  display: inline-block;
+}
+
+.apply-arrow {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Hover korle arrow-ti ektu move korbe, dekhte bhalo lage */
+.link-wrapper:hover .apply-arrow {
+  transform: translateX(5px);
+  color: #00ff62; /* Icchemoto color dite paren */
+}
 </style>
             <div class="brand-badge">Join the Motion</div>
             <h1>Work with<br>Meet Motion</h1>
@@ -230,22 +244,270 @@
                 <div class="job-info">
                     <span style="font-size: 0.8rem; color: var(--text-dim);">Remote / Full-time</span>
                     <h2>Senior Brand Designer</h2>
-                    <p>Lead the visual direction for global startups.</p>
+                    <p>We are looking for a visionary designer who can build complete visual languages. You will be responsible for creating color palettes, typography systems, and comprehensive brand guidelines that tell a consistent story across all platforms. “Your mission is to turn a client’s vision into a living, breathing brand identity.”</p>
                 </div>
+                <a href="#apply-form" class="link-wrapper">
                 <div class="apply-arrow">→</div>
+                </a>
             </div>
 
             <div class="job-card">
                 <div class="job-info">
-                    <span style="font-size: 0.8rem; color: var(--text-dim);">Remote / Contract</span>
-                    <h2>Motion Graphics Artist</h2>
-                    <p>Bring static identities to life with fluid motion.</p>
+                    <span style="font-size: 0.8rem; color: var(--text-dim);">Remote / Project-based / Full-time</span>
+                    <h2>Logo & Typography Specialist</h2>
+                    <p>Focus on the art of minimalism and symbolism. We need someone who can translate complex brand values into simple, iconic marks. You should be a master of grid systems, vector precision, and conceptual thinking. “Your task is to craft unique symbols that leave a lasting impression on the world.”</p>
                 </div>
+                <a href="#apply-form" class="link-wrapper">
                 <div class="apply-arrow">→</div>
+                </a>
             </div>
+
+            <div class="job-card">
+                <div class="job-info">
+                    <span style="font-size: 0.8rem; color: var(--text-dim);">Remote / Full-time</span>
+                    <h2>Social Media Asset Designer</h2>
+                    <p>Join us to create high-conversion, trendy, and engaging social media posters. You will design eye-catching graphics for platforms like Instagram, LinkedIn, and Facebook, ensuring every post aligns perfectly with the brand’s voice. “Help our clients stand out in the digital noise with stunning social media visuals.”</p>
+                </div>
+                <a href="#apply-form" class="link-wrapper">
+                <div class="apply-arrow">→</div>
+                </a>
+            </div>
+
+            <div class="job-card">
+                <div class="job-info">
+                    <span style="font-size: 0.8rem; color: var(--text-dim);">Remote / Full-time</span>
+                    <h2>Print & Packaging Designer</h2>
+                    <p>We are seeking a detail-oriented designer to handle premium packaging and print materials. From business cards to product labels, you will ensure everything is print-ready, including perfect die-lines and CMYK color accuracy. “Enhance the physical product experience through premium aesthetics and unboxing joy.”</p>
+                </div>
+                <a href="#apply-form" class="link-wrapper">
+                <div class="apply-arrow">→</div>
+                </a>
+            </div>
+            
 
             </div>
 
+
+            <style>
+<style>
+    /* Premium Dark Theme Styles */
+    .career-container {
+        max-width: 850px;
+        margin: 60px auto;
+        background: #0a0a0a;
+        padding: 60px;
+        border-radius: 28px;
+        border: 1px solid #1f1f1f;
+        font-family: 'Inter', -apple-system, sans-serif;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        color: #fff;
+        position: relative;
+    }
+
+    .career-container h2 {
+        font-size: 40px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #fff 0%, #888 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+        letter-spacing: -1px;
+    }
+
+    .career-container p {
+        font-size: 17px;
+        color: #999;
+        margin-bottom: 45px;
+        line-height: 1.6;
+    }
+
+    .application-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .full-width { grid-column: span 2; }
+
+    .form-control { display: flex; flex-direction: column; gap: 10px; }
+
+    .form-control label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #ccc;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-left: 5px;
+    }
+
+    .form-control input, 
+    .form-control select, 
+    .form-control textarea {
+        padding: 16px 20px;
+        border: 1px solid #222;
+        border-radius: 14px;
+        font-size: 15px;
+        background: #111;
+        color: #fff;
+        transition: all 0.4s ease;
+        outline: none;
+    }
+
+    .form-control input:focus, .form-control select:focus, .form-control textarea:focus {
+        border-color: #fff;
+        background: #161616;
+    }
+
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 20px center;
+        background-size: 16px;
+    }
+
+    .btn-wrapper {
+        grid-column: span 2;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 15px;
+    }
+
+    .submit-btn {
+        background: #fff;
+        color: #000;
+        padding: 18px 45px;
+        border: none;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: 0.3s ease;
+    }
+
+    .submit-btn:hover { background: #e0e0e0; transform: scale(1.02); }
+
+    /* Success Message Styles */
+    #status {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    #status.success {
+        display: block;
+        color: #11ff00;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #status.error {
+        display: block;
+        color: #ff4d4d;
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .career-container { padding: 40px 25px; margin: 20px; }
+        .application-form { grid-template-columns: 1fr; }
+        .full-width, .btn-wrapper { grid-column: span 1; }
+        .submit-btn { width: 100%; justify-content: center; }
+    }
+</style>
+
+<section class="career-container" id="apply-form">
+    <div id="form-content">
+        <h2>Join Meet Motion</h2>
+        <p>We're looking for elite creative talent to help us redefine brand identities.</p>
+
+        <form id="career-form" action="https://formspree.io/f/xeeegklv" method="POST" class="application-form">
+            <div class="form-control">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Adnan Sami" required>
+            </div>
+
+            <div class="form-control">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="hello@meetmotion.cc" required>
+            </div>
+
+            <div class="form-control">
+                <label>Expertise</label>
+                <select name="expertise" required>
+                    <option value="" disabled selected>Select Specialization</option>
+                    <option value="Brand Identity">Brand Identity Design</option>
+                    <option value="Logo Design">Logo Design</option>
+                    <option value="Social Assets">Social Media Poster</option>
+                    <option value="Packaging">Packaging & Print</option>
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label>Portfolio</label>
+                <input type="url" name="portfolio" placeholder="behance.net/yourname" required>
+            </div>
+
+            <div class="form-control full-width">
+                <label>Experience & Style</label>
+                <textarea name="message" rows="4" placeholder="Tell us about your design philosophy..."></textarea>
+            </div>
+
+            <div class="btn-wrapper">
+                <button type="submit" id="submit-button" class="submit-btn">
+                    Apply Now 
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="status"></div>
+</section>
+
+<script>
+    var form = document.getElementById("career-form");
+    
+    async function handleSubmit(event) {
+      event.preventDefault();
+      var status = document.getElementById("status");
+      var formContent = document.getElementById("form-content");
+      var data = new FormData(event.target);
+      
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          // Success: Hide form and show message
+          formContent.style.display = "none";
+          status.innerHTML = "🎉 Thanks! Your application has been submitted successfully.";
+          status.classList.add("success");
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+              status.innerHTML = "Oops! There was a problem submitting your form";
+            }
+            status.classList.add("error");
+          })
+        }
+      }).catch(error => {
+        status.innerHTML = "Oops! There was a problem connecting to the server";
+        status.classList.add("error");
+      });
+    }
+    form.addEventListener("submit", handleSubmit)
+</script>
+
+
+            
         <div class="footer-cta">
             <p style="margin-bottom: 30px; color: var(--text-dim);">Don't see a fit? Send us your portfolio anyway.</p>
             <a href="https://api.whatsapp.com/send/?phone=8801914438279&text&type=phone_number&app_absent=0" class="btn-premium">Drop Your CV</a>
@@ -333,7 +595,6 @@
                 <li><a href="https://meetmotion.cc#about" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">About Us</a></li>
                 <li><a href="https://meetmotion.cc#contact" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Contact Us</a></li>
                 <li><a href="https://meetmotion.cc#team" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Team</a></li>
-                <li><a href="https://meetmotion.cc/careers" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Careers</a></li>
                 <li><a href="https://meetmotion.cc#faq" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">FAQ</a></li>
             </ul>
         </div>
@@ -379,7 +640,4 @@
     </script>
 
 </body>
-
 </html>
-
-
