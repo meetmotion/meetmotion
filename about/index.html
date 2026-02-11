@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meetmotion.cc/about">
+    <meta property="og:title" content="About | Meet Motion">
+    <meta property="og:description" content="Meet Motion is a creative studio redefining brand identities through strategic design and motion.">
+    <meta property="og:image" content="https://i.pinimg.com/736x/f0/88/65/f08865a5faa7c07ef459b274db00ec25.jpg">
+    <meta name="author" content="Meet Motion">
+    <meta name="robots" content="index, follow">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Meet Motion</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon1.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #121212;
+            --accent: #ffffff;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        /* --- CENTERED HEADER (Same as Projects/Careers) --- */
+        header {
+            text-align: center;
+            margin-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .back-home-container { margin-bottom: 40px; }
+        .minimal-back-btn { display: inline-flex; align-items: center; text-decoration: none; gap: 8px; transition: 0.3s; }
+        .text-link { color: rgba(255, 255, 255, 0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .minimal-back-btn:hover .text-link { color: #fff; }
+
+        .brand-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -3px;
+            line-height: 0.9;
+        }
+
+        /* --- ABOUT CONTENT --- */
+        .about-section {
+            margin-top: 60px;
+        }
+
+        .hero-text {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-bottom: 60px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .hero-text span { color: #fff; font-weight: 700; }
+
+        /* Bento Stats/Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 28px;
+            transition: 0.4s ease;
+        }
+
+        .value-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .value-card p {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        /* Full Width Narrative */
+        .narrative {
+            padding: 60px;
+            background: var(--surface);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            text-align: left;
+            margin-bottom: 100px;
+        }
+
+        .narrative h2 { font-size: 2rem; margin-bottom: 20px; letter-spacing: -1px; }
+        .narrative p { color: var(--text-dim); margin-bottom: 20px; font-size: 1.1rem; }
+
+        /* --- FOOTER CTA --- */
+        .footer-cta {
+            text-align: center;
+            padding-top: 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-premium {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 100px;
+            transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .values-grid { grid-template-columns: 1fr; }
+            .hero-text { font-size: 1.4rem; }
+            .narrative { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="back-home-container">
+                <a href="https://meetmotion.cc" class="minimal-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                    <span class="text-link">Home</span>
+                </a>
+            </div>
+            <div class="brand-badge">The Studio</div>
+            <h1>About<br>Meet Motion</h1>
+        </header>
+
+        <section class="about-section">
+            <p class="hero-text">
+                We are a creative agency specializing in <span>Brand Identity</span> and <span>Motion Design</span>. We help visionary founders turn complex ideas into iconic brands.
+            </p>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Minimalism</h3>
+                    <p>We believe in the power of simplicity. Every line, color, and movement has a purpose.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Motion</h3>
+                    <p>In a static world, we bring your brand to life with dynamic and meaningful motion.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Strategy</h3>
+                    <p>We don't just design; we think. Every visual language is built on a solid strategic foundation.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Impact</h3>
+                    <p>Our goal is to create visual identities that leave a lasting impression on the global market.</p>
+                </div>
+            </div>
+
+            <div class="narrative">
+                <h2>Our Story</h2>
+                <p>Founded with a passion for minimalism and modern aesthetics, Meet Motion was born to bridge the gap between static design and interactive experiences. We’ve worked with startups and established brands worldwide to redefine how they communicate visually.</p>
+                <p>We don't just provide services; we build partnerships. Your vision is the core of our motion.</p>
+            </div>
+        </section>
+
+        <div class="footer-cta">
+            <p style="margin-bottom: 30px; color: var(--text-dim);">Ready to tell your brand's story?</p>
+            <a href="https://meetmotion.cc#contact" class="btn-premium">Let's Collaborate</a>
+        </div>
+    </div>
+
+      <footer id="main-footer" style="background-color: #000000; padding: 40px 20px 0 20px; font-family: Arial, sans-serif;">
+    <style>
+        /* Hover Effects */
+        .social-icons a {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            color: #ffffff !important;
+        }
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+        }
+        .footer-links a {
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #ffffff !important;
+            padding-left: 5px;
+        }
+        .footer-item a:hover {
+            color: #ffffff !important;
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            .footer-item {
+                flex: none !important;
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .footer-item a {
+                text-align: center !important;
+            }
+        }
+    </style>
+
+    <div class="footer-grid" style="max-width: 1500px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 70px;">
+        
+        <div class="footer-info" style="flex: 1; min-width: 200px; text-align: left;">
+            <div class="footer-logo">
+                <img src="assets/005.png" alt="Meet Motion Logo" style="width: 180px; height: auto; margin-bottom: 15px;">
+            </div>
+            <p class="footer-text" style="margin: 0; font-size: 14px; color: #bbb;">We design modern brand identities where color and motion come together to create meaningful visual experiences.</p>
+            
+            <div class="social-icons" style="display: flex; justify-content: flex-start; align-items: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                <a href="https://www.behance.net/meetmotion" target="_blank" style="text-decoration: none; font-size: 20px; font-weight: bold; color: #ffffff;">Bē</a>
+                
+                <a href="https://facebook.com/meetmotion" target="_blank" title="Facebook" style="display: inline-flex; align-items: center; color: #ffffff;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                
+                <a href="https://www.instagram.com/meetmotion.online/" target="_blank" title="Instagram" style="display: inline-flex; align-items: center; color: #ffffff;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                
+                <a href="https://x.com/meet_motion" target="_blank" style="text-decoration: none; font-size: 20px; color: #ffffff;">𝕏</a>
+                
+                <a href="https://www.youtube.com/@MeetMotion" target="_blank" title="YouTube" style="display: inline-flex; align-items: center; color: #ffffff;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 150px; text-align: left;">
+            <div class="footer-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #c2c1c1;">NAVIGATION</div>
+            <ul class="footer-links" style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="https://meetmotion.cc#services" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Services</a></li>
+                <li><a href="https://meetmotion.cc/projects" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Projects</a></li>
+                <li><a href="https://meetmotion.cc#pricing-premium" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Pricing</a></li>
+                <li><a href="https://meetmotion.cc#reviews" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Reviews</a></li>
+            </ul>
+        </div>
+
+        <div style="flex: 1; min-width: 150px; text-align: left;">
+            <div class="footer-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #c2c1c1;">QUICK LINKS</div>
+            <ul class="footer-links" style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="https://meetmotion.cc/about" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">About Us</a></li>
+                <li><a href="https://meetmotion.cc#contact" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Contact Us</a></li>
+                <li><a href="https://meetmotion.cc#team" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Team</a></li>
+                <li><a href="https://meetmotion.cc/careers" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Careers</a></li>
+                <li><a href="https://meetmotion.cc#faq" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div style="flex: 1; min-width: 200px; text-align: left;">
+            <div class="footer-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #c2c1c1;">CONTACT</div>
+            <p class="footer-text" style="margin: 8px 0; font-size: 14px; color: #bbb;">Email: meetmotion.online@gmail.com</p>
+            <p class="footer-text" style="margin: 8px 0; font-size: 14px; color: #bbb;">WhatsApp: +880 17814-85506</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid #dddddd18; font-size: 14px; color: #888; margin-top: 20px; gap: 15px; max-width: 1500px; margin-left: auto; margin-right: auto;">
+        
+        <div class="footer-item" style="flex: 1; display: flex; justify-content: flex-start; min-width: 150px;">
+            <a href="https://meetmotion.cc/terms" style="text-decoration: none; color: #888; transition: 0.3s; width: 100%; text-align: left;">Terms & Conditions</a>
+        </div>
+
+        <div class="footer-item" style="flex: 1; text-align: center; min-width: 200px;">
+            &copy; <span id="year">2026</span> Meet Motion, All rights reserved.
+        </div>
+
+        <div class="footer-item" style="flex: 1; display: flex; justify-content: flex-end; min-width: 150px;">
+            <a href="https://meetmotion.cc/privacy" style="text-decoration: none; color: #888; transition: 0.3s; width: 100%; text-align: right;">Privacy Policy</a>
+        </div>
+    </div>
+
+    <div class="footer-full-branding-wrapper" style="margin-top: 40px; margin-left: -20px; margin-right: -20px; line-height: 0;">
+        <img src="assets/footer.jpg.png" alt="Meet Motion Footer Branding" style="width: 100vw; height: auto; display: block; object-fit: cover;">
+    </div>
+
+</footer>
+
+
+</body>
+</html>
