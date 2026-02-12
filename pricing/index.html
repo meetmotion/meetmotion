@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meetmotion.cc/projects">
+    <meta property="og:title" content="Projects | Meet Motion — Brand Identity & Assets">
+    <meta property="og:description" content="Premium Quality Affordable Pricing Elevate Your Brand Premium Quality, Affordable Pricing by Meet Motion.">
+    <meta property="og:image" content="https://i.pinimg.com/736x/72/f0/85/72f085b569154a6c617bc456e207245c.jpg">
+    <meta name="keywords" content="Meet Motion, Brand Identity, Logo Design, Branding Agency, Graphic Design, Portfolio">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta name="author" content="Meet Motion Projects">
+    <meta name="robots" content="index, follow">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans  |  Meet Motion</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon11.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #121212;
+            --accent: #ffffff;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+        header { text-align: center; margin-bottom: 60px; }
+        header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
+        header p { color: var(--text-dim); font-size: 1.1rem; }
+
+        /* Tabs Styling */
+        .tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
+        .tab-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+            padding: 12px 30px; border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: 600;
+        }
+        .tab-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+        /* Pricing Grid */
+        .pricing-grid { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .pricing-grid.active { display: grid; animation: fadeIn 0.5s ease; }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border); padding: 40px;
+            border-radius: 32px; transition: 0.4s; position: relative; display: flex; flex-direction: column;
+        }
+        .card:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-10px); }
+        .card.featured { border-color: var(--accent); box-shadow: 0 0 30px rgba(255,255,255,0.05); }
+
+        .tier-title { font-size: 0.9rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .price { font-size: 3rem; font-weight: 800; margin: 20px 0; color: var(--accent); }
+        .price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+
+        .feature-list { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+        .feature-list li { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; color: var(--text-main); }
+        .feature-list li::before { content: "✓"; margin-right: 10px; color: var(--accent); font-weight: bold; }
+
+        .btn-select {
+            padding: 15px; text-align: center; border: 1px solid var(--accent); border-radius: 100px;
+            text-decoration: none; font-weight: 700; transition: 0.3s;
+        }
+        .card:hover .btn-select { background: var(--accent); color: var(--bg); }
+        .btn-select-light { color: var(--accent); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) { .tabs { flex-direction: column; align-items: center; } .tab-btn { width: 100%; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+             <div class="back-home-container">
+    <a href="https://meetmotion.cc" class="minimal-back-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+            <path d="m15 18-6-6 6-6"/>
+        </svg>
+        <span class="text-link">Home</span>
+    </a>
+</div>
+
+<style>
+    .back-home-container {
+        margin: 30px 0;
+        padding-left: 5px;
+    }
+
+    .minimal-back-btn {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .arrow-icon {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .text-link {
+        color: rgba(255, 255, 255, 0.5); /* Faded white for clean look */
+        font-family: 'Inter', sans-serif;
+        font-size: 11px; /* Very small and professional */
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    /* Hover State */
+    .minimal-back-btn:hover .text-link {
+        color: #ffffff; /* Becomes pure white on hover */
+    }
+
+    .minimal-back-btn:hover .arrow-icon {
+        transform: translateX(-4px); /* Subtle left slide */
+    }
+
+    /* Subtle Underline Animation */
+    .text-link::after {
+        content: '';
+        position: absolute;
+        width: 0%;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        transition: width 0.3s ease;
+    }
+
+    .minimal-back-btn:hover .text-link::after {
+        width: 100%;
+    }
+</style>
+            <h1>Pricing Plans</h1>
+            <p>Investment for world-class brand identity and visual excellence.</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('logo')">Logo Design</button>
+            <button class="tab-btn" onclick="showTab('branding')">Brand Identity</button>
+            <button class="tab-btn" onclick="showTab('others')">Other Assets</button>
+        </div>
+
+        <div id="logo" class="pricing-grid active">
+            <div class="card">
+                <span class="tier-title">Starter</span>
+                <div class="price">$199</div>
+                <ul class="feature-list">
+                    <li>2 Logo Concepts</li><li>High-Res JPG/PNG</li><li>3 Revisions</li><li>Standard Delivery</li><li>3 Mockup Images</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Starter</a>
+            </div>
+            <div class="card featured">
+                <span class="tier-title">Growth</span>
+                <div class="price">$399</div>
+                <ul class="feature-list">
+                    <li>3 Logo Concepts</li><li>All Source Files</li><li>Vector Format</li><li>5 Revisions</li><li>Social Media Kit</li><li>5 Mockup Images</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Growth</a>
+            </div>
+            <div class="card">
+                <span class="tier-title">Enterprise</span>
+                <div class="price">$599</div>
+                <ul class="feature-list">
+                    <li>5 Premium Concepts</li><li>Brand Style Guide</li><li>7 Revisions</li><li>Stationery Designs</li><li>VIP Support</li><li>Copyright Ownership</li><li>Priority Delivery</li><li>3D Mockups</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Enterprise</a>
+            </div>
+        </div>
+
+        <div id="branding" class="pricing-grid">
+            <div class="card">
+                <span class="tier-title">Starter</span>
+                <div class="price">$699</div>
+                <ul class="feature-list">
+                    <li>Logo Pack</li><li>Basic Color Palette</li><li>Typography</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Starter</a>
+            </div>
+            <div class="card featured">
+                <span class="tier-title">Growth</span>
+                <div class="price">$999</div>
+                <ul class="feature-list">
+                    <li>Everything in Startup</li><li>Business Cards</li><li>Letterhead</li><li>Brand Book</li><li>Social Media Templates</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Growth</a>
+            </div>
+            <div class="card">
+                <span class="tier-title">Enterprise</span>
+                <div class="price">$1250</div>
+                <ul class="feature-list">
+                    <li>Full Brand Audit</li><li>Custom Iconography</li><li>Marketing Assets</li><li>Style Guide PDF</li><li>3D Product Renderings</li><li>Strategy Consultation</li><li>Direct Access to Designer</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Enterprise</a>
+            </div>
+        </div>
+
+        <div id="others" class="pricing-grid">
+            <div class="card">
+                <span class="tier-title">Business Card</span>
+                <div class="price">$29</div>
+                <ul class="feature-list">
+                    <li>Creative Concept</li><li>Print Ready Files</li><li>Two Side Design</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Get Started</a>
+            </div>
+            <div class="card">
+                <span class="tier-title">Poster</span>
+                <div class="price">$120</div>
+                <ul class="feature-list">
+                    <li>Creative Concept</li><li>Print Ready Files</li><li> Social Media Size</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Get Started</a>
+            </div>
+            <div class="card">
+                <span class="tier-title">Packaging</span>
+                <div class="price">$250</div>
+                <ul class="feature-list">
+                    <li>Box/Label Design</li><li>Dielines</li><li>3D Renderings</li><li>Print Production Specs</li><li>2 Variations</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Get Started</a>
+            </div>
+            <div class="card featured">
+                <span class="tier-title">Custom</span>
+                <div class="price">Varies</div>
+                <ul class="feature-list">
+                    <li>Unique Creative Request</li><li>Tailored Strategy</li><li>Full Project Management</li><li>Dedicated Support Line</li><li>Unlimited Revisions</li>
+                </ul>
+                <a href="https://meetmotion.cc/#contact" class="btn-select btn-select-light">Choose Enterprise</a>
+            </div>
+        </div>
+    </div>
+ <footer id="main-footer" style="background-color: #000000; padding: 40px 20px 0 20px; font-family: Arial, sans-serif;">
+    <style>
+        /* Hover Effects */
+        .social-icons a {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            color: #ffffff !important;
+        }
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+        }
+        .footer-links a {
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #ffffff !important;
+            padding-left: 5px;
+        }
+        .footer-item a:hover {
+            color: #ffffff !important;
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            .footer-item {
+                flex: none !important;
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .footer-item a {
+                text-align: center !important;
+            }
+        }
+    </style>
+
+    <div class="footer-grid" style="max-width: 1500px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 70px;">
+        
+        <div class="footer-info" style="flex: 1; min-width: 200px; text-align: left;">
+            <div class="footer-logo">
+                <img src="assets/005.png" alt="Meet Motion Logo" style="width: 180px; height: auto; margin-bottom: 15px;">
+            </div>
+            <p class="footer-text" style="margin: 0; font-size: 14px; color: #bbb;">We design modern brand identities where color and motion come together to create meaningful visual experiences.</p>
+            
+            <div class="social-icons" style="display: flex; justify-content: flex-start; align-items: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                <a href="https://www.behance.net/meetmotion" target="_blank" style="text-decoration: none; font-size: 20px; font-weight: bold; color: #ffffff;">Bē</a>
+                
+                <a href="https://facebook.com/meetmotion" target="_blank" title="Facebook" style="display: inline-flex; align-items: center; color: #ffffff;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                
+                <a href="https://www.instagram.com/meetmotion.online/" target="_blank" title="Instagram" style="display: inline-flex; align-items: center; color: #ffffff;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                
+                <a href="https://x.com/meet_motion" target="_blank" style="text-decoration: none; font-size: 20px; color: #ffffff;">𝕏</a>
+                
+                <a href="https://www.youtube.com/@MeetMotion" target="_blank" title="YouTube" style="display: inline-flex; align-items: center; color: #ffffff;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 150px; text-align: left;">
+            <div class="footer-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #c2c1c1;">NAVIGATION</div>
+            <ul class="footer-links" style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="/services" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Services</a></li>
+                <li><a href="/projects" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Projects</a></li>
+                <li><a href="/pricing" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Pricing</a></li>
+                <li><a href="https://meetmotion.cc#reviews" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Reviews</a></li>
+            </ul>
+        </div>
+
+        <div style="flex: 1; min-width: 150px; text-align: left;">
+            <div class="footer-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #c2c1c1;">QUICK LINKS</div>
+            <ul class="footer-links" style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="/about" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">About Us</a></li>
+                <li><a href="https://meetmotion.cc#contact" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Contact Us</a></li>
+                <li><a href="https://meetmotion.cc#team" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Team</a></li>
+                <li><a href="/careers" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">Careers</a></li>
+                <li><a href="https://meetmotion.cc#faq" style="text-decoration: none; color: #bbb; font-size: 14px; margin-bottom: 8px; display: block;">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div style="flex: 1; min-width: 200px; text-align: left;">
+            <div class="footer-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #c2c1c1;">CONTACT</div>
+            <p class="footer-text" style="margin: 8px 0; font-size: 14px; color: #bbb;">Email: meetmotion.online@gmail.com</p>
+            <p class="footer-text" style="margin: 8px 0; font-size: 14px; color: #bbb;">WhatsApp: +880 17814-85506</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid #dddddd18; font-size: 14px; color: #888; margin-top: 20px; gap: 15px; max-width: 1500px; margin-left: auto; margin-right: auto;">
+        
+        <div class="footer-item" style="flex: 1; display: flex; justify-content: flex-start; min-width: 150px;">
+            <a href="/terms-and-conditions" style="text-decoration: none; color: #888; transition: 0.3s; width: 100%; text-align: left;">Terms & Conditions</a>
+        </div>
+
+        <div class="footer-item" style="flex: 1; text-align: center; min-width: 200px;">
+            &copy; <span id="year">2026</span> Meet Motion, All rights reserved.
+        </div>
+
+        <div class="footer-item" style="flex: 1; display: flex; justify-content: flex-end; min-width: 150px;">
+            <a href="/privacy-policy" style="text-decoration: none; color: #888; transition: 0.3s; width: 100%; text-align: right;">Privacy Policy</a>
+        </div>
+    </div>
+
+    <div class="footer-full-branding-wrapper" style="margin-top: 40px; margin-left: -20px; margin-right: -20px; line-height: 0;">
+        <img src="assets/footer.jpg.png" alt="Meet Motion Footer Branding" style="width: 100vw; height: auto; display: block; object-fit: cover;">
+    </div>
+
+</footer>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.pricing-grid').forEach(grid => grid.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
