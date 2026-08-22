@@ -1,0 +1,11 @@
+# Meet Motion — robots.txt
+# https://meetmotion.cc
+
+User-agent: *
+Allow: /
+
+# Block error/utility pages from indexing
+Disallow: /404
+
+# Sitemap location
+Sitemap: https://meetmotion.cc/sitemap.xml
